@@ -7,7 +7,7 @@
 
 #### 以下是使用示例：
 
-**1.控制器注解注入，在继承JFinal框架的Controller的子类上加上注解标签@JFinalController({"/", "/hello"})**
+**1.控制器注解注入（在继承JFinal框架的Controller的子类上加上注解标签@JFinalController**
 
 ```java
 @JFinalController({"/", "/hello"})
