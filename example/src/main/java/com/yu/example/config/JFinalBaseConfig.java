@@ -1,12 +1,9 @@
 package com.yu.example.config;
 
 import com.jfinal.config.*;
-import com.jfinal.core.Controller;
 import com.jfinal.plugin.activerecord.ActiveRecordPlugin;
-import com.jfinal.plugin.activerecord.Model;
 import com.jfinal.plugin.druid.DruidPlugin;
 import com.jfinal.template.Engine;
-import com.yu.example.bean.User;
 import com.yu.jinal.plugin.ext.annotation.ControllerAnnotation;
 import com.yu.jinal.plugin.ext.annotation.IControllerScanReport;
 import com.yu.jinal.plugin.ext.annotation.IModelScanReport;
