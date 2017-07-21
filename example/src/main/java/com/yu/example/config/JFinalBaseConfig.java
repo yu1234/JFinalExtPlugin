@@ -36,17 +36,9 @@ public class JFinalBaseConfig extends JFinalConfig {
         System.out.println("configConstant");
     }
 
-    public void configRoute(final Routes routes) {
+    public void configRoute(Routes routes) {
         System.out.println("configRoute");
-        ControllerAnnotation controllerAnnotation = new ControllerAnnotation(scanControllerPackage, new IControllerScanReport() {
-            public void report(String controllerKey, Class<?> controllerClass, String module) {
-                routes.add(controllerKey, (Class<? extends Controller>) controllerClass);
-            }
-
-            public void report(String controllerKey, Class<?> controllerClass, String viewPath, String module) {
-                routes.add(controllerKey, (Class<? extends Controller>) controllerClass, viewPath);
-            }
-        });
+        ControllerAnnotation controllerAnnotation = new ControllerAnnotation(scanControllerPackage, routes);
     }
 
     public void configEngine(Engine engine) {
@@ -61,15 +53,7 @@ public class JFinalBaseConfig extends JFinalConfig {
         //建立表和对象映射关系对象
         final ActiveRecordPlugin arp = new ActiveRecordPlugin(dp);
         //添加表和对象映射关系，扫描@JFinalModel注解
-        ModelAnnotationPlugin map = new ModelAnnotationPlugin(scanModelPackage, new IModelScanReport() {
-            public void report(String tableName, String primaryKey, Class<?> modelClass) {
-                arp.addMapping(tableName, primaryKey, (Class<? extends Model<?>>) modelClass);
-            }
-
-            public void report(String tableName, Class<?> modelClass) {
-                arp.addMapping(tableName, User.class);
-            }
-        });
+        ModelAnnotationPlugin map = new ModelAnnotationPlugin(scanModelPackage, arp);
         plugins.add(map);
         plugins.add(arp);
 

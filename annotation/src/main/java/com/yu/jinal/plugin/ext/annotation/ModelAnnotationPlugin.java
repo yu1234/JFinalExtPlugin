@@ -1,9 +1,9 @@
 package com.yu.jinal.plugin.ext.annotation;
 
 
-
-
 import com.jfinal.plugin.IPlugin;
+import com.jfinal.plugin.activerecord.ActiveRecordPlugin;
+import com.jfinal.plugin.activerecord.Model;
 import com.yu.jinal.plugin.ext.annotation.annotation.JFinalModel;
 import com.yu.jinal.plugin.ext.annotation.utils.AnnotationScanUtils;
 import com.yu.jinal.plugin.ext.annotation.utils.StringTools;
@@ -20,17 +20,21 @@ public class ModelAnnotationPlugin implements IPlugin {
     private String[] scanPackage;
     //扫描结果回调接口
     private IModelScanReport modelScanReport;
+    // ActiveRecord plugin.
+    private ActiveRecordPlugin arp;
 
     public ModelAnnotationPlugin(String[] scanPackage, IModelScanReport modelScanReport) {
         this.modelScanReport = modelScanReport;
         this.scanPackage = scanPackage;
     }
 
+    public ModelAnnotationPlugin(String[] scanPackage, ActiveRecordPlugin arp) {
+        this.arp = arp;
+        this.scanPackage = scanPackage;
+    }
+
     //初始化参数
     public boolean start() {
-        if (this.modelScanReport == null) {
-            throw new RuntimeException("IModelScanReport not null");
-        }
         //开始扫描
         try {
             AnnotationScanUtils.scanAnnotationByClass(new Class[]{JFinalModel.class}, new IAnnotationScanReport() {
@@ -43,10 +47,21 @@ public class ModelAnnotationPlugin implements IPlugin {
                                 String tableName = jFinalModel.tableName();
                                 String primaryKey = jFinalModel.primaryKey();
                                 if (StringTools.isNotBlank(tableName)) {
-                                    modelScanReport.report(tableName, modelClass);
-                                    if (StringTools.isNotBlank(primaryKey) && !primaryKey.equals("id")) {
-                                        modelScanReport.report(tableName, primaryKey, modelClass);
+                                    if (modelScanReport != null) {
+                                        modelScanReport.report(tableName, modelClass);
+                                        if (StringTools.isNotBlank(primaryKey) && !primaryKey.equals("id")) {
+                                            modelScanReport.report(tableName, primaryKey, modelClass);
+                                        }
                                     }
+                                    if (arp != null) {
+                                        if (StringTools.isNotBlank(primaryKey) && !primaryKey.equals("id")) {
+                                            arp.addMapping(tableName, primaryKey, (Class<? extends Model<?>>) modelClass);
+                                        } else {
+                                            arp.addMapping(tableName, (Class<? extends Model<?>>) modelClass);
+                                        }
+
+                                    }
+
                                 }
 
                             }

@@ -1,7 +1,8 @@
 package com.yu.jinal.plugin.ext.annotation;
 
 
-
+import com.jfinal.config.Routes;
+import com.jfinal.core.Controller;
 import com.yu.jinal.plugin.ext.annotation.annotation.JFinalController;
 import com.yu.jinal.plugin.ext.annotation.utils.AnnotationScanUtils;
 import com.yu.jinal.plugin.ext.annotation.utils.StringTools;
@@ -17,26 +18,26 @@ public class ControllerAnnotation {
     private IControllerScanReport controllerScanReport;
     //需要扫描的包空间
     private String[] scanPackage;
+    private Routes routes;
 
-    public ControllerAnnotation() {
+    //路径统一配置（适合单路由）
+    public ControllerAnnotation(String[] scanPackage, Routes routes) {
+        this.scanPackage = scanPackage;
+        this.routes = routes;
+        startScan();
     }
 
+    //路径配置（适合拆分路由）
     public ControllerAnnotation(String[] scanPackage, IControllerScanReport controllerScanReport) {
         this.scanPackage = scanPackage;
         this.controllerScanReport = controllerScanReport;
-        startScan(this.scanPackage, this.controllerScanReport);
+        startScan();
     }
 
     /**
      * 开始扫描注解
-     *
-     * @param scanPackage
-     * @param controllerScanReport
      */
-    public void startScan(String[] scanPackage, final IControllerScanReport controllerScanReport) {
-        if (controllerScanReport == null) {
-            throw new RuntimeException("IControllerScanReport not null");
-        }
+    private void startScan() {
         //开始扫描
         try {
             AnnotationScanUtils.scanAnnotationByClass(new Class[]{JFinalController.class}, new IAnnotationScanReport() {
@@ -52,11 +53,21 @@ public class ControllerAnnotation {
                                 if (StringTools.isNotBlank(values)) {
                                     for (String controllerKey : values) {
                                         if (StringTools.isNotBlank(controllerKey)) {
-                                            if ("controllerKey".equals(viewPath)) {
-                                                controllerScanReport.report(controllerKey, modelClass, module);
-                                            } else {
-                                                controllerScanReport.report(controllerKey, modelClass, viewPath, module);
+                                            if (controllerScanReport != null) {
+                                                if ("controllerKey".equals(viewPath)) {
+                                                    controllerScanReport.report(controllerKey, modelClass, module);
+                                                } else {
+                                                    controllerScanReport.report(controllerKey, modelClass, viewPath, module);
+                                                }
                                             }
+                                            if (routes != null) {
+                                                if ("controllerKey".equals(viewPath)) {
+                                                    routes.add(controllerKey, (Class<? extends Controller>) modelClass);
+                                                } else {
+                                                    routes.add(controllerKey, (Class<? extends Controller>) modelClass, viewPath);
+                                                }
+                                            }
+
                                         }
 
 
