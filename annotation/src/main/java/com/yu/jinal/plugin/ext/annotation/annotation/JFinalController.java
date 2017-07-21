@@ -10,7 +10,7 @@ import java.lang.annotation.*;
 @Retention(RetentionPolicy.RUNTIME)
 @Documented
 public @interface JFinalController {
-    String[] value();//访问某个 Controller 所需要的一个字符
+    String[] value();//访问某个 Controller 所需要的一个字符,相当于controllerKey，可定义多个
 
     String module() default "";//所属模块，适用于路由拆分
 

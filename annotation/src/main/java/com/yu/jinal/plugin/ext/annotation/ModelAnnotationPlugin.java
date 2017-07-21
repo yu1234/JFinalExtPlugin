@@ -1,6 +1,5 @@
 package com.yu.jinal.plugin.ext.annotation;
 
-
 import com.jfinal.plugin.IPlugin;
 import com.jfinal.plugin.activerecord.ActiveRecordPlugin;
 import com.jfinal.plugin.activerecord.Model;
@@ -23,14 +22,20 @@ public class ModelAnnotationPlugin implements IPlugin {
     // ActiveRecord plugin.
     private ActiveRecordPlugin arp;
 
-    public ModelAnnotationPlugin(String[] scanPackage, IModelScanReport modelScanReport) {
-        this.modelScanReport = modelScanReport;
+    public ModelAnnotationPlugin(String[] scanPackage) {
+
         this.scanPackage = scanPackage;
     }
 
-    public ModelAnnotationPlugin(String[] scanPackage, ActiveRecordPlugin arp) {
+
+    //注入方式一
+    public void injectModel(IModelScanReport modelScanReport) {
+        this.modelScanReport = modelScanReport;
+    }
+
+    //注入方式二
+    public void injectModel(ActiveRecordPlugin arp) {
         this.arp = arp;
-        this.scanPackage = scanPackage;
     }
 
     //初始化参数

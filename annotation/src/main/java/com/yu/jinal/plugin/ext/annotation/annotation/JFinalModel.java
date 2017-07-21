@@ -9,6 +9,6 @@ import java.lang.annotation.*;
 @Retention(RetentionPolicy.RUNTIME)
 @Documented
 public @interface JFinalModel {
-     String tableName();
-     String primaryKey() default "id";
+     String tableName(); //数据库表名
+     String primaryKey() default "id"; //主键名称，默认为“id”
 }

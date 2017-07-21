@@ -20,17 +20,22 @@ public class ControllerAnnotation {
     private String[] scanPackage;
     private Routes routes;
 
-    //路径统一配置（适合单路由）
-    public ControllerAnnotation(String[] scanPackage, Routes routes) {
+
+    public ControllerAnnotation(String[] scanPackage) {
         this.scanPackage = scanPackage;
-        this.routes = routes;
-        startScan();
+
+
     }
 
     //路径配置（适合拆分路由）
-    public ControllerAnnotation(String[] scanPackage, IControllerScanReport controllerScanReport) {
-        this.scanPackage = scanPackage;
+    public void injectController(IControllerScanReport controllerScanReport) {
         this.controllerScanReport = controllerScanReport;
+        startScan();
+    }
+
+    //路径统一配置（适合单路由）
+    public void injectController(Routes routes) {
+        this.routes = routes;
         startScan();
     }
 

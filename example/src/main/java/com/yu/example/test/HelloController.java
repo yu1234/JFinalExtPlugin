@@ -5,7 +5,7 @@ import com.yu.example.bean.User;
 import com.yu.jinal.plugin.ext.annotation.annotation.JFinalController;
 
 /**
- * Created by igreentree on 2017/7/19 0019.
+ * Created by yu on 2017/7/19 0019.
  */
 @JFinalController({"/", "/hello"})
 public class HelloController extends Controller {
