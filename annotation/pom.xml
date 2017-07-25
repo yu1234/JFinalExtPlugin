@@ -2,28 +2,54 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <parent>
         <artifactId>JFinalPluginExt</artifactId>
-        <groupId>com.yu</groupId>
-        <version>1.0-SNAPSHOT</version>
+        <groupId>com.github.yu1234</groupId>
+        <version>1.0.0</version>
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>com.yu.JFinalPluginExt</groupId>
+    <groupId>com.github.yu1234.JFinalPluginExt</groupId>
     <artifactId>annotation</artifactId>
     <packaging>jar</packaging>
 
     <name>annotation</name>
-    <url>http://maven.apache.org</url>
+    <url>https://github.com/yu1234/JFinalExtPlugin</url>
+    <licenses>
+        <license>
+            <name>Apache License, Version 2.0</name>
+            <url>http://www.apache.org/licenses/LICENSE-2.0</url>
+            <distribution>repo</distribution>
+        </license>
+    </licenses>
+    <scm>
+        <connection>scm:git:https://github.com/yu1234/JFinalExtPlugin</connection>
+        <developerConnection>scm:git:git@github.com:yu1234/JFinalExtPlugin</developerConnection>
+        <url>git@github.com:dotEngine/dotEngine-java-sdk</url>
+        <tag>1.0.0</tag>
+    </scm>
+    <issueManagement>
+        <system>GitHub Issues</system>
+        <url>https://github.com/yu1234/JFinalExtPlugin/issues</url>
+    </issueManagement>
 
+    <ciManagement>
+        <system>Web site</system>
+        <url>http://dot.cc</url>
+    </ciManagement>
+    <developers>
+        <developer>
+            <name>yuliuqing</name>
+            <email>836986488@qq.com</email>
+        </developer>
+    </developers>
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
 
     <dependencies>
         <dependency>
-            <groupId>junit</groupId>
-            <artifactId>junit</artifactId>
-            <version>3.8.1</version>
-            <scope>test</scope>
+            <groupId>com.jfinal</groupId>
+            <artifactId>jfinal</artifactId>
+            <version>3.1</version>
         </dependency>
         <!--注解扫描器 （annotation scan plugin）-->
         <dependency>
@@ -32,4 +58,14 @@
             <version>3.0.5</version>
         </dependency>
     </dependencies>
+    <distributionManagement>
+        <snapshotRepository>
+            <id>ossrh</id>
+            <url>https://oss.sonatype.org/content/repositories/snapshots</url>
+        </snapshotRepository>
+        <repository>
+            <id>ossrh</id>
+            <url>https://oss.sonatype.org/service/local/staging/deploy/maven2/</url>
+        </repository>
+    </distributionManagement>
 </project>

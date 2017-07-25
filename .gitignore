@@ -1,0 +1,7 @@
+# Created by .ignore support plugin (hsz.mobi)
+.idea
+JFinalPluginExt.iml
+out
+annotation/target
+annotation/annotation.iml
+example/target
