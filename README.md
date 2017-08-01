@@ -128,5 +128,9 @@ public class JFinalBaseConfig extends JFinalConfig {
 ```
 #### maven
 ```java
-审核中，请稍后
+<dependency>
+    <groupId>com.github.yu1234.JFinalPluginExt</groupId>
+    <artifactId>annotation</artifactId>
+    <version>1.0.0</version>
+</dependency>
 ```
