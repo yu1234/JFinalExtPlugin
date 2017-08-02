@@ -1,7 +1,7 @@
 ###  JFinalExtPlugin JFinal框架插件扩展
 
 
-改插件暂支持JFinal框架Model对象和Controller对象注解注入
+该插件暂支持JFinal框架Model对象和Controller对象注解注入
 
 
 
