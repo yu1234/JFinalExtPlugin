@@ -107,7 +107,7 @@ public class JFinalBaseConfig extends JFinalConfig {
         //添加表和对象映射关系，扫描@JFinalModel注解(注入方式一：直接传入ActiveRecordPlugin对象实例)
         ModelAnnotationPlugin map1 = new ModelAnnotationPlugin(scanModelPackage);
         map1.injectModel(arp);
-        //添加表和对象映射关系，扫描@JFinalModel注解(注入方式一：直接传入ActiveRecordPlugin对象实例)
+        //添加表和对象映射关系，扫描@JFinalModel注解(注入方式二：直接传入ActiveRecordPlugin对象实例)
         ModelAnnotationPlugin map2 = new ModelAnnotationPlugin(scanModelPackage);
         map2.injectModel(new IModelScanReport() {
             public void report(String tableName, String primaryKey, Class<?> modelClass) {
