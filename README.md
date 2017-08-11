@@ -1,7 +1,7 @@
 ###  JFinalExtPlugin JFinal框架插件扩展
 
 
-改插件暂支持JFinal框架Model对象和Controller对象注解注入
+该插件暂支持JFinal框架Model对象和Controller对象注解注入
 
 
 
@@ -107,7 +107,7 @@ public class JFinalBaseConfig extends JFinalConfig {
         //添加表和对象映射关系，扫描@JFinalModel注解(注入方式一：直接传入ActiveRecordPlugin对象实例)
         ModelAnnotationPlugin map1 = new ModelAnnotationPlugin(scanModelPackage);
         map1.injectModel(arp);
-        //添加表和对象映射关系，扫描@JFinalModel注解(注入方式一：直接传入ActiveRecordPlugin对象实例)
+        //添加表和对象映射关系，扫描@JFinalModel注解(注入方式二：直接传入ActiveRecordPlugin对象实例)
         ModelAnnotationPlugin map2 = new ModelAnnotationPlugin(scanModelPackage);
         map2.injectModel(new IModelScanReport() {
             public void report(String tableName, String primaryKey, Class<?> modelClass) {
@@ -128,5 +128,9 @@ public class JFinalBaseConfig extends JFinalConfig {
 ```
 #### maven
 ```java
-审核中，请稍后
+<dependency>
+    <groupId>com.github.yu1234.JFinalPluginExt</groupId>
+    <artifactId>annotation</artifactId>
+    <version>1.0.0</version>
+</dependency>
 ```
