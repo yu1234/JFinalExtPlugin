@@ -4,5 +4,7 @@ JFinalPluginExt.iml
 out
 annotation/target
 annotation/annotation.iml
+shiro/target
+shiro/shiro.iml
 example/target
 example/example.iml
